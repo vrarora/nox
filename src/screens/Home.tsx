@@ -3,23 +3,25 @@ import type { Focus } from '../hooks/useFocus';
 import { useClock } from '../hooks/useClock';
 import { useWeather } from '../hooks/useWeather';
 import { Glyph } from '../components/Glyph';
+import { Ambient } from '../components/Ambient';
 
 interface Props {
   apps: Entry[];
   utils: Entry[];
   focus: Focus;
+  idle: boolean;
   onHover: (f: Focus) => void;
   onOpen: (e: Entry) => void;
 }
 
-export function Home({ apps, utils, focus, onHover, onOpen }: Props) {
+export function Home({ apps, utils, focus, idle, onHover, onOpen }: Props) {
   const clock = useClock();
   const { weather, place } = useWeather();
   const current = (focus.zone === 'list' ? apps : utils)[focus.index];
   const accent = current?.colour ?? '#ffffff';
 
   return (
-    <main class={`home home--${focus.zone}`} style={{ '--accent': accent }}>
+    <main class={`home home--${focus.zone}${idle ? ' home--idle' : ''}`} style={{ '--accent': accent }}>
       <div class="glare" aria-hidden="true" />
 
       <header class="status">
@@ -73,6 +75,8 @@ export function Home({ apps, utils, focus, onHover, onOpen }: Props) {
           );
         })}
       </nav>
+
+      <Ambient active={idle} clock={clock} weather={weather} place={place} />
     </main>
   );
 }

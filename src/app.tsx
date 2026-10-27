@@ -5,11 +5,13 @@ import { launch, toast } from './lib/luna';
 import { perf } from './lib/perf';
 import { useFocus, type Focus } from './hooks/useFocus';
 import { useInputs, STATE_TEXT } from './hooks/useInputs';
+import { useIdle } from './hooks/useIdle';
 import { Home } from './screens/Home';
 
 export function App() {
   const [exists, setExists] = useState<Record<string, boolean>>(cachedExists);
   const inputs = useInputs();
+  const idle = useIdle();
 
   // Inputs and utilities always show; apps show once the TV confirms them.
   // An input entry carries its live state in the subtitle.
@@ -53,5 +55,5 @@ export function App() {
     return () => { clearTimeout(t); document.removeEventListener('webOSRelaunch', relaunch); };
   }, []);
 
-  return <Home apps={apps} utils={utils} focus={focus} onHover={hover} onOpen={open} />;
+  return <Home apps={apps} utils={utils} focus={focus} idle={idle} onHover={hover} onOpen={open} />;
 }

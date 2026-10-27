@@ -165,3 +165,45 @@
   transition: color var(--focus-ms) var(--ease-out), background-color var(--focus-ms) var(--ease-out);
 }
 .util.is-focused { color: #000; background: #fff; }
+
+/* Ambient. The backdrop is a stand-in for the bundled photography: layered
+   gradients on a layer 110% wide, drifting 60 px over three minutes. */
+.ambient {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1200ms var(--ease-out), visibility 0s linear 1200ms;
+  pointer-events: none;
+}
+.ambient.is-active { opacity: 1; visibility: visible; transition: opacity 1600ms var(--ease-out); }
+.ambient__backdrop {
+  position: absolute;
+  left: -5%;
+  top: -5%;
+  width: 110%;
+  height: 110%;
+  background:
+    radial-gradient(1400px 760px at 72% 18%, #2a3f5f 0%, rgba(42, 63, 95, 0) 62%),
+    radial-gradient(1000px 620px at 18% 72%, #3a2438 0%, rgba(58, 36, 56, 0) 60%),
+    radial-gradient(1900px 900px at 50% 118%, #16222f 0%, rgba(22, 34, 47, 0) 70%),
+    linear-gradient(180deg, #05070b 0%, #0a1018 48%, #030405 100%);
+  will-change: transform;
+}
+.ambient.is-active .ambient__backdrop { animation: drift 180s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-60px, -30px); } }
+.ambient__content {
+  position: absolute;
+  left: var(--safe-x);
+  top: var(--safe-y);
+  transition: transform 4s linear;
+}
+.ambient__time { font-size: 132px; line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45); }
+.ambient__suffix { font-size: 40px; font-weight: 500; margin-left: 10px; color: rgba(255, 255, 255, 0.7); letter-spacing: 0; }
+.ambient__line { margin-top: 10px; font-size: 28px; font-weight: 400; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.72); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5); }
+
+/* While ambient, the launcher chrome fades out underneath. */
+.home--idle .status, .home--idle .list, .home--idle .preview, .home--idle .utils, .home--idle .glare {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
