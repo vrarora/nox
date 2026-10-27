@@ -2,7 +2,7 @@ import type { Entry } from '../catalogue';
 import type { Focus } from '../hooks/useFocus';
 import { useClock } from '../hooks/useClock';
 import { useWeather } from '../hooks/useWeather';
-import { Glyph } from '../components/Glyph';
+import { Glyph, hasRest } from '../components/Glyph';
 import { Ambient } from '../components/Ambient';
 import { Preview } from '../components/Preview';
 import type { Nuvio } from '../hooks/useNuvio';
@@ -61,15 +61,18 @@ export function Home({ apps, utils, focus, idle, moving, nuvio, onHover, onOpen 
       <nav class="utils" aria-label="Utilities">
         {utils.map((e, i) => {
           const on = focus.zone === 'utils' && i === focus.index;
+          const metal = hasRest(e.key);
           return (
             <button
               key={e.key}
-              class={`util${on ? ' is-focused' : ''}`}
+              class={`util${metal ? ' util--metal' : ''}${on ? ' is-focused' : ''}`}
               aria-label={e.title}
               onMouseEnter={() => onHover({ zone: 'utils', index: i })}
               onClick={() => onOpen(e)}
             >
-              <Glyph name={e.key} />
+              {metal
+                ? <><span class="util__rest"><Glyph name={e.key} rest /></span><span class="util__lit"><Glyph name={e.key} lit /></span></>
+                : <Glyph name={e.key} />}
             </button>
           );
         })}

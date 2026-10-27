@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Nox icon audit</title>
+<style>
+  body { margin: 0; font: 12px system-ui; color: #888; background: #111 }
+  section { padding: 20px 24px }
+  h2 { margin: 0 0 12px; font: 600 13px system-ui; letter-spacing: .04em }
+  .row { display: flex; align-items: flex-end; gap: 22px; margin-bottom: 14px }
+  .lab { width: 64px; align-self: center }
+  figure { margin: 0; text-align: center }
+  figcaption { margin-top: 4px; font-size: 10px; opacity: .7 }
+  canvas { image-rendering: pixelated }
+</style>
+<div id="root"></div>
+<script>
+  // Every preview is the SVG file itself, drawn by the browser at that pixel size
+  const SIZES = [16, 24, 32, 48, 64, 128, 256];
+  const STATES = ['master', 'idle', 'selected'];
+  const BGS = { black: '#000000', near: '#0A0A0A', grey: '#808080', white: '#FFFFFF' };
+  const only = new URLSearchParams(location.search).get('bg');
+  const root = document.getElementById('root');
+
+  for (const [key, bg] of Object.entries(BGS)) {
+    if (only && only !== key) continue;
+    const sec = document.createElement('section');
+    sec.style.background = bg;
+    sec.style.color = key === 'white' || key === 'grey' ? '#333' : '#888';
+    sec.innerHTML = `<h2>${bg}</h2>` + STATES.map(st =>
+      `<div class="row"><div class="lab">${st}</div>` +
+      SIZES.map(s => `<figure><img src="../../../brand/nox-icon/svg/nox-icon-${st}.svg" width="${s}" height="${s}"><figcaption>${s}</figcaption></figure>`).join('') +
+      `</div>`).join('');
+    root.appendChild(sec);
+  }
+
+  // Pixel view: rendered at 16, 24 and 32, then enlarged 8x without smoothing
+  if (!only || only === 'pixels') {
+    const sec = document.createElement('section');
+    sec.style.background = '#000';
+    sec.innerHTML = '<h2>pixels at 16 / 24 / 32, enlarged 8x, on #000</h2>';
+    for (const st of STATES) {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `<div class="lab">${st}</div>`;
+      for (const s of [16, 24, 32]) {
+        const small = document.createElement('canvas');
+        small.width = small.height = s;
+        const big = document.createElement('canvas');
+        big.width = big.height = s * 8;
+        const img = new Image();
+        img.onload = () => {
+          small.getContext('2d').drawImage(img, 0, 0, s, s);
+          const g = big.getContext('2d');
+          g.imageSmoothingEnabled = false;
+          g.drawImage(small, 0, 0, s * 8, s * 8);
+        };
+        img.src = `../../../brand/nox-icon/svg/nox-icon-${st}.svg`;
+        row.appendChild(big);
+      }
+      sec.appendChild(row);
+    }
+    root.appendChild(sec);
+  }
+</script>

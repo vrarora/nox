@@ -159,6 +159,20 @@
 }
 .util.is-focused { color: #000; background: #fff; }
 
+/* Nox's mark takes no pill. Focus crossfades its subdued metal to the bright one. */
+.util--metal { position: relative; }
+.util--metal.is-focused { background: transparent; }
+.util__rest, .util__lit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--focus-ms) var(--ease-out);
+}
+.util__lit, .util--metal.is-focused .util__rest { opacity: 0; }
+.util--metal.is-focused .util__lit { opacity: 1; }
+
 /* Ambient. The backdrop is a stand-in for the bundled photography: layered
    gradients on a layer 110% wide, drifting 60 px over three minutes. */
 .ambient {

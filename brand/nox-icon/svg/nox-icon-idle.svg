@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>Nox — idle</title>
+  <defs>
+    <path id="ni-n" d="M56.01 44L151.93 96.9L151.93 131.34L86.17 95.07L86.17 212L56.01 212ZM199.99 212L104.07 159.1L104.07 124.66L169.83 160.93L169.83 44L199.99 44Z"/>
+    <clipPath id="ni-clip"><use href="#ni-n"/></clipPath>
+
+    <!-- Body: key light from the top left, falling to graphite at the bottom right -->
+    <linearGradient id="ni-body" gradientUnits="userSpaceOnUse" x1="56" y1="44" x2="200" y2="212">
+      <stop offset="0" stop-color="#6F7277"/>
+      <stop offset=".3" stop-color="#56585D"/>
+      <stop offset=".5" stop-color="#3E4044"/>
+      <stop offset=".63" stop-color="#46484C"/>
+      <stop offset=".84" stop-color="#2A2B2E"/>
+      <stop offset="1" stop-color="#1C1D20"/>
+    </linearGradient>
+
+    <!-- Sheen: one wide, soft band across the upper arm -->
+    <linearGradient id="ni-sheen" gradientUnits="userSpaceOnUse" x1="70" y1="150" x2="150" y2="40">
+      <stop offset=".25" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0.07"/>
+      <stop offset=".8" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Pool: diffuse light on the top-left corner -->
+    <radialGradient id="ni-pool" gradientUnits="userSpaceOnUse" cx="64" cy="48" r="110">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Crease: the arms darken toward the gap between them, fading out before the stems -->
+    <linearGradient id="ni-crease" gradientUnits="userSpaceOnUse" x1="164" y1="119.3" x2="139.9" y2="163.1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".33" stop-color="#000" stop-opacity="0.2"/>
+      <stop offset=".67" stop-color="#000" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ni-armsFade" gradientUnits="userSpaceOnUse" x1="86.17" x2="169.83">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".25" stop-color="#fff"/>
+      <stop offset=".75" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="ni-arms"><rect width="256" height="256" fill="url(#ni-armsFade)"/></mask>
+
+    <!-- Falloff: the lower ends sink toward black -->
+    <linearGradient id="ni-falloff" gradientUnits="userSpaceOnUse" x1="0" y1="120" x2="0" y2="212">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+
+  <use href="#ni-n" fill="url(#ni-body)"/>
+  <g clip-path="url(#ni-clip)">
+    <rect width="256" height="256" fill="url(#ni-pool)"/>
+    <rect width="256" height="256" fill="url(#ni-sheen)"/>
+    <rect width="256" height="256" fill="url(#ni-crease)" mask="url(#ni-arms)"/>
+    <rect width="256" height="256" fill="url(#ni-falloff)"/>
+
+    <!-- Rim: top-facing edges catch a hairline of light -->
+    <use href="#ni-n" transform="translate(0 .8)" fill="#000" fill-opacity="0.1"/>
+  </g>
+</svg>

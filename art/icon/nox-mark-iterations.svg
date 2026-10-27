@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 864 416">
+  <defs>
+  <symbol id="m1" viewBox="0 0 256 256"><path d="M42.667 72.837A30.170 30.170 0 0 1 94.170 51.503L149.333 106.667V42.667H213.333V183.163A30.170 30.170 0 0 1 161.830 204.497L106.667 149.333V213.333H42.667Z"/></symbol>
+  <symbol id="m2" viewBox="0 0 256 256"><path d="M42.667 85.333L85.333 42.667L149.333 106.667V42.667H213.333V170.667L170.667 213.333L106.667 149.333V213.333H42.667Z"/></symbol>
+  <symbol id="m3" viewBox="0 0 256 256"><path d="M42.667 106.667A64 64 0 0 1 106.667 42.667L149.333 85.333V42.667H213.333V149.333A64 64 0 0 1 149.333 213.333L106.667 170.667V213.333H42.667Z"/></symbol>
+  </defs>
+  <rect width="864" height="416" fill="#000"/>
+  <g fill="#D8D9DE" font-family="system-ui, sans-serif" font-size="13" letter-spacing=".04em">
+  <use href="#m1" x="24" y="24" width="256" height="256"/>
+  <use href="#m1" x="96" y="304" width="48" height="48"/>
+  <use href="#m1" x="176" y="316" width="24" height="24"/>
+  <text x="152" y="390" text-anchor="middle">1 · Turn</text>
+  <use href="#m2" x="304" y="24" width="256" height="256"/>
+  <use href="#m2" x="376" y="304" width="48" height="48"/>
+  <use href="#m2" x="456" y="316" width="24" height="24"/>
+  <text x="432" y="390" text-anchor="middle">2 · Cut</text>
+  <use href="#m3" x="584" y="24" width="256" height="256"/>
+  <use href="#m3" x="656" y="304" width="48" height="48"/>
+  <use href="#m3" x="736" y="316" width="24" height="24"/>
+  <text x="712" y="390" text-anchor="middle">3 · Monolith</text>
+  </g>
+</svg>
