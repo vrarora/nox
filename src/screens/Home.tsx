@@ -1,33 +1,77 @@
 import type { Entry } from '../catalogue';
+import type { Focus } from '../hooks/useFocus';
+import { useClock } from '../hooks/useClock';
+import { useWeather } from '../hooks/useWeather';
 import { Glyph } from '../components/Glyph';
 
 interface Props {
-  entries: Entry[];
-  index: number;
-  onHover: (i: number) => void;
+  apps: Entry[];
+  utils: Entry[];
+  focus: Focus;
+  onHover: (f: Focus) => void;
   onOpen: (e: Entry) => void;
 }
 
-export function Home({ entries, index, onHover, onOpen }: Props) {
-  const focused = entries[index];
+export function Home({ apps, utils, focus, onHover, onOpen }: Props) {
+  const clock = useClock();
+  const { weather, place } = useWeather();
+  const current = (focus.zone === 'list' ? apps : utils)[focus.index];
+  const accent = current?.colour ?? '#ffffff';
+
   return (
-    <main class="home" style={{ '--accent': focused?.colour ?? '#fff' }}>
+    <main class={`home home--${focus.zone}`} style={{ '--accent': accent }}>
+      <div class="glare" aria-hidden="true" />
+
+      <header class="status">
+        <div class="status__time">{clock.time}<span class="status__suffix">{clock.suffix}</span></div>
+        <div class="status__line">{weather ? `${weather.temp}° ${place}, ${weather.text}` : place} · {clock.date}</div>
+      </header>
+
       <ul class="list" role="listbox" aria-label="Apps">
-        {entries.map((e, i) => (
-          <li
-            key={e.key}
-            class={`row row--${e.kind}${i === index ? ' is-focused' : ''}`}
-            style={{ '--i': i - index }}
-            role="option"
-            aria-selected={i === index}
-            onMouseEnter={() => onHover(i)}
-            onClick={() => onOpen(e)}
-          >
-            <span class="row__glyph" style={{ color: i === index ? e.colour : undefined }}><Glyph name={e.key} /></span>
-            <span class="row__title">{e.title}</span>
-          </li>
-        ))}
+        {apps.map((e, i) => {
+          const on = focus.zone === 'list' && i === focus.index;
+          return (
+            <li
+              key={e.key}
+              class={`row${on ? ' is-focused' : ''}`}
+              style={{ '--d': Math.abs(i - (focus.zone === 'list' ? focus.index : 0)) }}
+              role="option"
+              aria-selected={on}
+              onMouseEnter={() => onHover({ zone: 'list', index: i })}
+              onClick={() => onOpen(e)}
+            >
+              <span class="row__glyph" style={on ? { color: e.colour } : undefined}><Glyph name={e.key} /></span>
+              <span class="row__title">{e.title}</span>
+            </li>
+          );
+        })}
       </ul>
+
+      <section class="preview" aria-live="polite">
+        <div class="preview__glare" aria-hidden="true" />
+        <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} /></div>
+        <div class="preview__text">
+          <div class="preview__kicker">{current?.kind === 'input' ? 'Input' : 'Open'}</div>
+          <div class="preview__title">{current?.subtitle ? `${current.title} · ${current.subtitle}` : current?.title}</div>
+        </div>
+      </section>
+
+      <nav class="utils" aria-label="Utilities">
+        {utils.map((e, i) => {
+          const on = focus.zone === 'utils' && i === focus.index;
+          return (
+            <button
+              key={e.key}
+              class={`util${on ? ' is-focused' : ''}`}
+              aria-label={e.title}
+              onMouseEnter={() => onHover({ zone: 'utils', index: i })}
+              onClick={() => onOpen(e)}
+            >
+              <Glyph name={e.key} />
+            </button>
+          );
+        })}
+      </nav>
     </main>
   );
 }

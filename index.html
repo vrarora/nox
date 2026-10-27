@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=1920, height=1080">
 <title>Sill</title>
+<link rel="preload" href="./fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* First-paint rules only. Everything else lives in src/styles. */
+  @font-face { font-family: Inter; font-style: normal; font-weight: 100 900; font-display: block; src: url(./fonts/inter.woff2) format('woff2'); }
   html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; color: #fff; }
   body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   #app { position: relative; width: 1920px; height: 1080px; }
