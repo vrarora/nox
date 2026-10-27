@@ -4,23 +4,36 @@ import { cachedExists, refreshExists } from './lib/boot';
 import { launch, toast } from './lib/luna';
 import { perf } from './lib/perf';
 import { useFocus, type Focus } from './hooks/useFocus';
+import { useInputs, STATE_TEXT } from './hooks/useInputs';
 import { Home } from './screens/Home';
 
 export function App() {
   const [exists, setExists] = useState<Record<string, boolean>>(cachedExists);
+  const inputs = useInputs();
 
   // Inputs and utilities always show; apps show once the TV confirms them.
+  // An input entry carries its live state in the subtitle.
   const apps = useMemo(
-    () => CATALOGUE.filter((e) => e.kind === 'input' || (e.kind === 'app' && exists[e.key] !== false)),
-    [exists],
+    () => CATALOGUE
+      .filter((e) => e.kind === 'input' || (e.kind === 'app' && exists[e.key] !== false))
+      .map((e) => {
+        const info = e.kind === 'input' ? inputs[e.appId] : undefined;
+        return info ? { ...e, subtitle: `${e.subtitle} · ${STATE_TEXT[info.state]}`, state: info.state } : e;
+      }),
+    [exists, inputs],
   );
   const utils = useMemo(() => CATALOGUE.filter((e) => e.kind === 'utility'), []);
 
   const open = useCallback((e: Entry) => {
-    launch(e.appId, e.params).then((r) => {
+    // An HDMI input with a sleeping CEC device: ask the TV to wake it as it switches.
+    const info = e.kind === 'input' ? inputs[e.appId] : undefined;
+    const params = info?.cecId !== undefined && info.state !== 'on'
+      ? { id: 'uniqueId', value: String(info.cecId) }
+      : e.params;
+    launch(e.appId, params).then((r) => {
       if (r.returnValue === false) toast(`Couldn't open ${e.title}`);
     });
-  }, []);
+  }, [inputs]);
 
   const activate = useCallback((f: Focus) => {
     const e = (f.zone === 'list' ? apps : utils)[f.index];

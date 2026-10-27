@@ -86,6 +86,15 @@
 }
 .row.is-focused .row__title { font-weight: 600; }
 
+/* Live state dot for inputs: on, starting, rest, off, unplugged. */
+.row__state { width: 10px; height: 10px; border-radius: 999px; margin-left: 4px; flex: none; }
+.row__state--on        { background: #4fe28a; box-shadow: 0 0 10px #4fe28a; }
+.row__state--starting  { background: #4fe28a; box-shadow: 0 0 10px #4fe28a; animation: pulse 1.2s ease-in-out infinite; }
+.row__state--rest      { background: #ffb340; box-shadow: 0 0 10px #ffb340; }
+.row__state--off       { background: rgba(255, 255, 255, 0.3); }
+.row__state--unplugged { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3); }
+@keyframes pulse { 50% { opacity: 0.35; } }
+
 /* The preview panel on the right. */
 .preview {
   position: absolute;
