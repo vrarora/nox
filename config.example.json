@@ -1,0 +1,6 @@
+{
+  "order": ["nuvio", "youtube", "netflix", "prime", "hotstar", "spotify", "ps5"],
+  "hidden": [],
+  "idleMs": 30000,
+  "sounds": true
+}

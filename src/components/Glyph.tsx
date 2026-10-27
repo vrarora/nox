@@ -12,6 +12,7 @@ const marks: Record<string, preact.JSX.Element> = {
   nuvio: <><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M9.5 8v8l6.5-4z" /></>,
   prime: <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h7M4 10.5h5" /><path d="M14.5 6.5l3.5 4-3.5 4" /><path d="M3 17.5c4.5 3 13.5 3 18 0" /><path d="M19.2 16l1.9 1.5-.6 2.3" /></g>,
   hotstar: <path d="M12 2.2l2.6 6.5 7 .5-5.4 4.5 1.8 6.8L12 16.8l-6 3.7 1.8-6.8L2.4 9.2l7-.5z" />,
+  sill: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /><circle cx="9" cy="7" r="2" fill="#000" /><circle cx="15" cy="12" r="2" fill="#000" /><circle cx="8" cy="17" r="2" fill="#000" /></g>,
   inputs: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /><path d="M8 9V6h8v3" /><path d="M10 16v2M14 16v2" /></g>,
   settings: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2" /><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" /></g>,
   lghome: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7" /><path d="M6 10v9h12v-9" /></g>,

@@ -12,19 +12,20 @@ interface Props {
   utils: Entry[];
   focus: Focus;
   idle: boolean;
+  moving: string | null;
   nuvio: Nuvio;
   onHover: (f: Focus) => void;
   onOpen: (e: Entry) => void;
 }
 
-export function Home({ apps, utils, focus, idle, nuvio, onHover, onOpen }: Props) {
+export function Home({ apps, utils, focus, idle, moving, nuvio, onHover, onOpen }: Props) {
   const clock = useClock();
   const { weather, place } = useWeather();
   const current = (focus.zone === 'list' ? apps : utils)[focus.index];
   const accent = current?.colour ?? '#ffffff';
 
   return (
-    <main class={`home home--${focus.zone}${idle ? ' home--idle' : ''}`} style={{ '--accent': accent }}>
+    <main class={`home home--${focus.zone}${idle ? ' home--idle' : ''}${moving ? ' home--moving' : ''}`} style={{ '--accent': accent }}>
       <div class="glare" aria-hidden="true" />
 
       <header class="status">
@@ -38,7 +39,7 @@ export function Home({ apps, utils, focus, idle, nuvio, onHover, onOpen }: Props
           return (
             <li
               key={e.key}
-              class={`row${on ? ' is-focused' : ''}`}
+              class={`row${on ? ' is-focused' : ''}${moving === e.key ? ' is-moving' : ''}`}
               style={{ '--d': Math.abs(i - (focus.zone === 'list' ? focus.index : 0)) }}
               role="option"
               aria-selected={on}
@@ -53,7 +54,9 @@ export function Home({ apps, utils, focus, idle, nuvio, onHover, onOpen }: Props
         })}
       </ul>
 
-      <Preview current={current} nuvio={nuvio} />
+      {moving
+        ? <div class="hint" aria-live="polite">Up and Down to move · OK to place · Back to cancel</div>
+        : <Preview current={current} nuvio={nuvio} />}
 
       <nav class="utils" aria-label="Utilities">
         {utils.map((e, i) => {

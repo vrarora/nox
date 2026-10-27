@@ -3,13 +3,12 @@ import { useEffect, useState } from 'preact/hooks';
 // Idle after a quiet spell. The first key or pointer move only wakes the
 // screen; it is swallowed before the focus engine sees it.
 
-const DEFAULT_MS = 30_000;
-
-export function useIdle(): boolean {
+export function useIdle(idleMs: number): boolean {
   const [idle, setIdle] = useState(false);
 
   useEffect(() => {
-    const ms = Number(localStorage.getItem('sill.idleMs')) || DEFAULT_MS;
+    const ms = Number(localStorage.getItem('sill.idleMs')) || idleMs;
+    if (!ms) { setIdle(false); return; }
     let timer = 0;
     let isIdle = false;
     const arm = () => { clearTimeout(timer); timer = window.setTimeout(() => { isIdle = true; setIdle(true); }, ms); };
@@ -30,7 +29,7 @@ export function useIdle(): boolean {
       window.removeEventListener('click', wake, true);
       document.removeEventListener('visibilitychange', onVisible);
     };
-  }, []);
+  }, [idleMs]);
 
   return idle;
 }

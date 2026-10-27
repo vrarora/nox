@@ -224,3 +224,25 @@
 .preview__glyph--small { font-size: 96px; }
 .preview--link .preview__title { max-width: 560px; text-align: center; line-height: 1.25; }
 .preview--link .preview__line { letter-spacing: 0.08em; }
+
+/* Move mode: the lifted row, and a hint where the preview was. */
+.row.is-moving { color: #fff; opacity: 1; transform: translateX(16px); }
+.row.is-moving .row__title { font-weight: 600; }
+.home--moving .row:not(.is-moving) { opacity: 0.35; }
+.hint {
+  position: absolute;
+  left: 1100px;
+  top: 300px;
+  width: 740px;
+  height: 416px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 60px;
+  box-sizing: border-box;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-2);
+}

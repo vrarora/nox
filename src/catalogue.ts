@@ -20,6 +20,7 @@ export const CATALOGUE: Entry[] = [
   { key: 'hotstar', title: 'JioHotstar',    appId: 'hotstar',             colour: '#1f80e0', kind: 'app' },
   { key: 'spotify', title: 'Spotify',       appId: 'spotify-beehive',     colour: '#1db954', kind: 'app' },
   { key: 'ps5',     title: 'PlayStation 5', appId: 'com.webos.app.hdmi2', colour: '#2f6cff', kind: 'input', subtitle: 'HDMI 2' },
+  { key: 'sill',     title: 'Sill settings', appId: '',                           colour: '#ffffff', kind: 'utility' },
   { key: 'inputs',   title: 'Inputs',   appId: 'com.webos.app.quickinputpicker', colour: '#ffffff', kind: 'utility' },
   { key: 'settings', title: 'Settings', appId: 'com.palm.app.settings',          colour: '#ffffff', kind: 'utility' },
   { key: 'lghome',   title: 'LG Home',  appId: 'com.webos.app.home',             colour: '#ffffff', kind: 'utility' },

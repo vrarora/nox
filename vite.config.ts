@@ -14,8 +14,12 @@ function classicScript(): Plugin {
   };
 }
 
+import { readFileSync } from 'node:fs';
+const version = JSON.parse(readFileSync(new URL('./public/appinfo.json', import.meta.url), 'utf8')).version as string;
+
 export default defineConfig({
   base: './',
+  define: { __APP_VERSION__: JSON.stringify(version) },
   plugins: [preact(), classicScript()],
   build: {
     target: 'chrome132',
