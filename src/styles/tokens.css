@@ -1,0 +1,9 @@
+:root {
+  --ink: #ffffff;
+  --ink-2: rgba(255, 255, 255, 0.5);
+  --ink-3: rgba(255, 255, 255, 0.3);
+  --safe-x: 80px;
+  --safe-y: 60px;
+  --focus-ms: 180ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
