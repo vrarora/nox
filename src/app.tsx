@@ -41,7 +41,7 @@ export function App() {
   const utils = useMemo(() => CATALOGUE.filter((e) => e.kind === 'utility'), []);
 
   const open = useCallback((e: Entry) => {
-    if (e.key === 'sill') { select(); setScreen('settings'); return; }
+    if (e.key === 'nox') { select(); setScreen('settings'); return; }
     select();
     // An HDMI input with a sleeping CEC device: ask the TV to wake it as it switches.
     const info = e.kind === 'input' ? inputs[e.appId] : undefined;

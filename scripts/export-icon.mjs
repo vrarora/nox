@@ -17,6 +17,9 @@ const outputs = [
   [130, 'png/webos/largeIcon.png'],
 ];
 
+// Splash mark box in px; the N itself is about two thirds of it
+const SPLASH_MARK = 192;
+
 // The SVG goes in as a data URL so the canvas stays untainted and can export
 const svg = 'data:image/svg+xml;base64,' + readFileSync(join(dir, 'svg/nox-icon-master.svg')).toString('base64');
 const page = `<!doctype html><pre id="o"></pre><script>
@@ -29,6 +32,16 @@ img.onload = () => {
     c.getContext('2d').drawImage(img, 0, 0, s, s);
     out[s] = c.toDataURL('image/png').split(',')[1];
   }
+
+  // Splash: the mark small and centred on black, shown while webOS spawns the app
+  const sp = document.createElement('canvas');
+  sp.width = 1920;
+  sp.height = 1080;
+  const g = sp.getContext('2d');
+  g.fillStyle = '#000';
+  g.fillRect(0, 0, 1920, 1080);
+  g.drawImage(img, (1920 - ${SPLASH_MARK}) / 2, (1080 - ${SPLASH_MARK}) / 2, ${SPLASH_MARK}, ${SPLASH_MARK});
+  out.splash = sp.toDataURL('image/png').split(',')[1];
   document.getElementById('o').textContent = JSON.stringify(out);
 };
 img.src = ${JSON.stringify(svg)};
@@ -45,3 +58,5 @@ for (const [s, file] of outputs) {
   writeFileSync(join(dir, file), Buffer.from(pngs[s], 'base64'));
   console.log(`${file}  ${s}×${s}`);
 }
+writeFileSync(join(dir, 'png/webos/splash.png'), Buffer.from(pngs.splash, 'base64'));
+console.log('png/webos/splash.png  1920×1080');

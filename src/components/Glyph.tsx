@@ -13,7 +13,7 @@ interface Mark { vb: string; mono: JSX.Element; lit?: JSX.Element; rest?: JSX.El
 const NOX = 'M56.01 44L151.93 96.9L151.93 131.34L86.17 95.07L86.17 212L56.01 212ZM199.99 212L104.07 159.1L104.07 124.66L169.83 160.93L169.83 44L199.99 44Z';
 const NOX_BODY_AT = [0, 0.3, 0.5, 0.63, 0.84, 1];
 interface Metal { body: string[]; pool: number; sheen: number; crease: number; falloff: number; rim: number }
-const NOX_IDLE: Metal = { body: ['#6F7277', '#56585D', '#3E4044', '#46484C', '#2A2B2E', '#1C1D20'], pool: 0.1, sheen: 0.07, crease: 0.2, falloff: 0.3, rim: 0.1 };
+const NOX_IDLE: Metal = { body: ['#6F7277', '#56585D', '#3E4044', '#46484C', '#2A2B2E', '#26272A'], pool: 0.1, sheen: 0.07, crease: 0.2, falloff: 0.22, rim: 0.1 };
 const NOX_SELECTED: Metal = { body: ['#E6E8EC', '#ADB0B6', '#7F8288', '#91949A', '#56595E', '#3B3D41'], pool: 0.3, sheen: 0.22, crease: 0.22, falloff: 0.2, rim: 0.14 };
 
 function noxMetal(id: string, t: Metal) {
@@ -95,7 +95,7 @@ const marks: Record<string, Mark> = {
     </g>,
   },
   hotstar: { vb: '0 0 24 24', mono: <path d="M15.33 10.65L15.23 11.40L14.94 12.10L14.48 12.71L13.88 13.17L13.18 13.46L12.42 13.56L11.67 13.46L10.97 13.17L10.37 12.71L9.90 12.10L9.61 11.40L9.51 10.65L9.61 9.90L9.90 9.20L10.37 8.59L10.97 8.13L11.67 7.84L12.42 7.74L13.18 7.84L13.88 8.13L14.48 8.59L14.94 9.20L15.23 9.90ZM14.90 10.90L23.00 13.33L14.25 12.33ZM13.31 12.97L10.95 22.02L11.57 12.98ZM10.90 12.61L4.93 15.19L10.15 11.66ZM9.96 10.98L1.00 7.65L10.17 9.61ZM10.50 9.07L7.99 5.61L11.26 8.46ZM12.27 8.17L13.61 1.98L13.47 8.40ZM14.09 8.81L23.00 2.06L14.87 10.25Z" /> },
-  sill: { vb: '16 16 224 224', mono: <path d={NOX} />, rest: noxMetal('nox-rest', NOX_IDLE), lit: noxMetal('nox-lit', NOX_SELECTED) },
+  nox: { vb: '16 16 224 224', mono: <path d={NOX} />, rest: noxMetal('nox-rest', NOX_IDLE), lit: noxMetal('nox-lit', NOX_SELECTED) },
   inputs: { vb: '0 0 24 24', mono: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /><path d="M8 9V6h8v3" /><path d="M10 16v2M14 16v2" /></g> },
   settings: { vb: '0 0 24 24', mono: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2" /><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" /></g> },
   lghome: { vb: '0 0 24 24', mono: <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7" /><path d="M6 10v9h12v-9" /></g> },

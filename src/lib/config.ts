@@ -12,7 +12,7 @@ export interface Config {
   [extra: string]: unknown;
 }
 
-export const CONFIG_KEY = 'sill.config.v1';
+export const CONFIG_KEY = 'nox.config.v1';
 
 export const DEFAULTS: Config = {
   order: CATALOGUE.filter((e) => e.kind !== 'utility').map((e) => e.key),

@@ -10,7 +10,7 @@
       <stop offset=".5" stop-color="#5A5D62"/>
       <stop offset=".63" stop-color="#6A6D72"/>
       <stop offset=".84" stop-color="#37393D"/>
-      <stop offset="1" stop-color="#232528"/>
+      <stop offset="1" stop-color="#2C2E32"/>
     </linearGradient>
 
     <!-- Sheen: one wide, soft band across the upper arm -->
@@ -44,7 +44,7 @@
     <!-- Falloff: the lower ends sink toward black -->
     <linearGradient id="falloff" gradientUnits="userSpaceOnUse" x1="0" y1="120" x2="0" y2="212">
       <stop offset="0" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".2"/>
     </linearGradient>
   </defs>
 

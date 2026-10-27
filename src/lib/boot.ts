@@ -4,7 +4,7 @@
 import { CATALOGUE } from '../catalogue';
 import { appExists } from './luna';
 
-const KEY = 'sill.exists.v1';
+const KEY = 'nox.exists.v1';
 
 export function cachedExists(): Record<string, boolean> {
   try { return JSON.parse(localStorage.getItem(KEY) ?? '{}'); } catch { return {}; }

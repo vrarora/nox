@@ -4,7 +4,7 @@ import { luna } from '../lib/luna';
 // Time and date, re-rendered once a minute on the minute. The 12/24-hour
 // choice follows the TV's own setting, cached so the first frame is right.
 
-const PREF_KEY = 'sill.timeFormat';
+const PREF_KEY = 'nox.timeFormat';
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

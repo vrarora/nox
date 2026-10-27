@@ -6,9 +6,9 @@ const BASE = 'https://api.nuvio.tv';
 const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzgxNTIxMzQ2LCJleHAiOjE5MzkyMDEzNDZ9.tmQaj682pwzehpqlgCDMnySOqiUvpgRbrE43T4VJpDI';
 const LINK_BASE = 'https://nuvio.tv/link';
 const CINEMETA = 'https://v3-cinemeta.strem.io';
-const TOKENS_KEY = 'sill.nuvio.v1';
-const ITEMS_KEY = 'sill.nuvio.cw.v1';
-const META_KEY = 'sill.nuvio.meta.v1';
+const TOKENS_KEY = 'nox.nuvio.v1';
+const ITEMS_KEY = 'nox.nuvio.cw.v1';
+const META_KEY = 'nox.nuvio.meta.v1';
 const PROFILE = 1;
 
 type Json = Record<string, unknown>;
@@ -67,7 +67,7 @@ async function session(): Promise<Tokens | null> {
   let t = loadTokens();
   if (t && jwtExpired(t.access)) t = await refresh();
   if (t) return t;
-  const r = await post('/auth/v1/signup', { data: { tv_client: 'sill' } }, ANON);
+  const r = await post('/auth/v1/signup', { data: { tv_client: 'nox' } }, ANON);
   if (!r.ok) return null;
   const made = pickTokens(await r.json(), true);
   if (made) saveTokens(made);
@@ -95,7 +95,7 @@ export interface LinkSession { code: string; userCode: string; url: string; expi
 export async function startLink(): Promise<LinkSession | null> {
   const nonce = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, '0')).join('');
   const raw = await rpc<Json | Json[]>('start_device_login_session', {
-    p_device_nonce: nonce, p_redirect_base_url: LINK_BASE, p_device_type: 'tv', p_device_name: 'Sill on LG OLED',
+    p_device_nonce: nonce, p_redirect_base_url: LINK_BASE, p_device_type: 'tv', p_device_name: 'Nox on LG OLED',
   });
   const row = (Array.isArray(raw) ? raw[0] : raw) as Json | undefined;
   if (!row) return null;

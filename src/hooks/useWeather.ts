@@ -3,7 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 // Open-Meteo, no key. The last reading is cached and shown at once; a fresh
 // one is fetched after the first paint and every 30 minutes.
 
-const KEY = 'sill.weather.v1';
+const KEY = 'nox.weather.v1';
 const PLACE = { name: 'Mumbai', lat: 19.076, lon: 72.8777, tz: 'Asia/Kolkata' };
 const FRESH_MS = 30 * 60_000;
 const STALE_MS = 6 * 60 * 60_000;

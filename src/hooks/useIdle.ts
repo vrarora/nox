@@ -7,7 +7,7 @@ export function useIdle(idleMs: number): boolean {
   const [idle, setIdle] = useState(false);
 
   useEffect(() => {
-    const ms = Number(localStorage.getItem('sill.idleMs')) || idleMs;
+    const ms = Number(localStorage.getItem('nox.idleMs')) || idleMs;
     if (!ms) { setIdle(false); return; }
     let timer = 0;
     let isIdle = false;

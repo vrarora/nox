@@ -30,11 +30,11 @@ const evaluate = (expression) => new Promise((res) => {
 });
 
 if (mode === 'pull') {
-  const raw = await evaluate(`localStorage.getItem('sill.config.v1')`);
+  const raw = await evaluate(`localStorage.getItem('nox.config.v1')`);
   console.log(raw ? JSON.stringify(JSON.parse(raw), null, 2) : '(defaults; nothing saved yet)');
 } else if (mode === 'push' && file) {
   const json = JSON.stringify(JSON.parse(readFileSync(resolve(file), 'utf8')));
-  await evaluate(`localStorage.setItem('sill.config.v1', ${JSON.stringify(json)}); location.reload(); 'ok'`);
+  await evaluate(`localStorage.setItem('nox.config.v1', ${JSON.stringify(json)}); location.reload(); 'ok'`);
   console.log('pushed and reloaded');
 } else {
   console.log('usage: node scripts/config.mjs pull | push <file.json>');

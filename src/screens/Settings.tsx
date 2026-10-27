@@ -6,7 +6,7 @@ import { tick, select } from '../lib/sound';
 import type { Nuvio } from '../hooks/useNuvio';
 import { unlink } from '../lib/nuvio';
 
-// Sill's own settings: a short vertical list. Left/Right change a value, OK
+// Nox's own settings: a short vertical list. Left/Right change a value, OK
 // toggles, Back returns home.
 
 interface Props { config: Config; nuvio: Nuvio; onChange: (c: Config) => void; onBack: () => void; version: string }
@@ -71,7 +71,7 @@ export function Settings({ config, nuvio, onChange, onBack, version }: Props) {
       case 'sounds': return 'Sounds';
       case 'hidden': return apps.find((e) => e.key === row.key)?.title ?? row.key;
       case 'nuvio': return 'Nuvio account';
-      case 'version': return 'Sill';
+      case 'version': return 'Nox';
     }
   };
   const section = (i: number): string | null => {

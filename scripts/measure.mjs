@@ -1,5 +1,5 @@
 // Cold-start numbers from the TV. Closes the app, launches it, attaches
-// DevTools and prints window.__sill plus navigation timing.
+// DevTools and prints window.__nox plus navigation timing.
 import { spawn, execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -42,7 +42,7 @@ function evaluate(ws, expression) {
 
 const EXPR = `JSON.stringify((() => {
   const n = performance.getEntriesByType('navigation')[0] || {};
-  return { ...window.__sill, dom: Math.round(n.domContentLoadedEventEnd || 0), load: Math.round(n.loadEventEnd || 0),
+  return { ...window.__nox, dom: Math.round(n.domContentLoadedEventEnd || 0), load: Math.round(n.loadEventEnd || 0),
            navStart: performance.timeOrigin, now: Date.now() };
 })())`;
 

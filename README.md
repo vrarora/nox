@@ -1,4 +1,4 @@
-# Sill
+# Nox
 
 A quiet home screen for an LG OLED, sideloaded in Developer Mode. No root.
 
@@ -16,7 +16,7 @@ Other scripts:
 | Command | Does |
 |---|---|
 | `npm run build` | Type-check and bundle to `dist/` |
-| `npm run package` | Build and make `build/app.sill.launcher_<version>_all.ipk` |
+| `npm run package` | Build and make `build/app.nox.launcher_<version>_all.ipk` |
 | `npm run measure -- 3` | Launch three times and print cold-start timings from the TV |
 | `node scripts/shot.mjs out.png [js]` | Screenshot the running app, optionally evaluating an expression first |
 | `node scripts/config.mjs pull` | Print the settings saved on the TV |
