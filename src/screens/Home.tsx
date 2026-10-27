@@ -4,17 +4,20 @@ import { useClock } from '../hooks/useClock';
 import { useWeather } from '../hooks/useWeather';
 import { Glyph } from '../components/Glyph';
 import { Ambient } from '../components/Ambient';
+import { Preview } from '../components/Preview';
+import type { Nuvio } from '../hooks/useNuvio';
 
 interface Props {
   apps: Entry[];
   utils: Entry[];
   focus: Focus;
   idle: boolean;
+  nuvio: Nuvio;
   onHover: (f: Focus) => void;
   onOpen: (e: Entry) => void;
 }
 
-export function Home({ apps, utils, focus, idle, onHover, onOpen }: Props) {
+export function Home({ apps, utils, focus, idle, nuvio, onHover, onOpen }: Props) {
   const clock = useClock();
   const { weather, place } = useWeather();
   const current = (focus.zone === 'list' ? apps : utils)[focus.index];
@@ -50,14 +53,7 @@ export function Home({ apps, utils, focus, idle, onHover, onOpen }: Props) {
         })}
       </ul>
 
-      <section class="preview" aria-live="polite">
-        <div class="preview__glare" aria-hidden="true" />
-        <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} /></div>
-        <div class="preview__text">
-          <div class="preview__kicker">{current?.kind === 'input' ? 'Switch to' : 'Open'}</div>
-          <div class="preview__title">{current?.subtitle ? `${current.title} · ${current.subtitle}` : current?.title}</div>
-        </div>
-      </section>
+      <Preview current={current} nuvio={nuvio} />
 
       <nav class="utils" aria-label="Utilities">
         {utils.map((e, i) => {
