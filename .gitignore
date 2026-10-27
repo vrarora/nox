@@ -4,3 +4,6 @@ build/
 *.ipk
 .DS_Store
 .scratch/
+
+# Private session notes, kept off GitHub
+HANDOFF.md
