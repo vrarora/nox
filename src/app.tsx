@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { CATALOGUE, type Entry } from './catalogue';
 import { cachedExists, refreshExists } from './lib/boot';
 import { arrange, loadConfig, saveConfig, type Config } from './lib/config';
@@ -58,11 +58,12 @@ export function App() {
     if (e) open(e);
   }, [apps, utils, open]);
 
+  const orderBefore = useRef<string[]>([]);
   const hold = useCallback((f: Focus) => {
     if (f.zone !== 'list') return;
     const e = apps[f.index];
-    if (e) { select(); setMoving(e.key); }
-  }, [apps]);
+    if (e) { select(); orderBefore.current = config.order; setMoving(e.key); }
+  }, [apps, config.order]);
 
   const counts = useMemo(() => ({ list: apps.length, utils: utils.length }), [apps.length, utils.length]);
   const { focus, set, hover } = useFocus(counts, screen === 'home' && !moving, { onActivate: activate, onHold: hold });
@@ -71,7 +72,6 @@ export function App() {
   // places it, Back cancels and restores the order from before.
   useEffect(() => {
     if (!moving) return;
-    const before = config.order;
     const down = (e: KeyboardEvent) => {
       const dir = e.keyCode === KEY.up ? -1 : e.keyCode === KEY.down ? 1 : 0;
       if (dir) {
@@ -88,7 +88,7 @@ export function App() {
           tick();
         }
       } else if (e.keyCode === KEY.ok) { if (!e.repeat) { select(); setMoving(null); } }
-      else if (e.keyCode === KEY.back || e.keyCode === KEY.escape) { updateConfig({ ...config, order: before }); setMoving(null); }
+      else if (e.keyCode === KEY.back || e.keyCode === KEY.escape) { updateConfig({ ...config, order: orderBefore.current }); setMoving(null); }
       else return;
       e.preventDefault();
     };

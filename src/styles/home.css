@@ -197,7 +197,7 @@
   top: var(--safe-y);
   transition: transform 4s linear;
 }
-.ambient__time { font-size: 132px; line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45); }
+.ambient__time { font-size: 132px; line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, 0.86); text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45); }
 .ambient__suffix { font-size: 40px; font-weight: 500; margin-left: 10px; color: rgba(255, 255, 255, 0.7); letter-spacing: 0; }
 .ambient__line { margin-top: 10px; font-size: 28px; font-weight: 400; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.72); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5); }
 
