@@ -9,7 +9,7 @@ export interface Entry {
   kind: 'app' | 'input' | 'utility';
   subtitle?: string;
   params?: Record<string, unknown>;
-  state?: 'on' | 'starting' | 'rest' | 'off' | 'unplugged';
+  state?: 'on' | 'starting' | 'off' | 'unplugged';
 }
 
 export const CATALOGUE: Entry[] = [

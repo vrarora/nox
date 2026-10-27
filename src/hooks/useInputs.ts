@@ -4,7 +4,9 @@ import { inputStatus, type InputDevice } from '../lib/luna';
 // HDMI inputs from the TV's input manager, polled while the app is visible.
 // Each input gets a plain-language state derived from plug, signal and CEC.
 
-export type InputState = 'on' | 'starting' | 'rest' | 'off' | 'unplugged';
+// The TV reports the same thing for a console in rest mode and one fully off
+// (HDMI 5 V present, no signal, CEC power "Off"), so both read as "off".
+export type InputState = 'on' | 'starting' | 'off' | 'unplugged';
 
 export interface InputInfo {
   appId: string;
@@ -15,18 +17,16 @@ export interface InputInfo {
 }
 
 export const STATE_TEXT: Record<InputState, string> = {
-  on: 'On', starting: 'Starting', rest: 'Rest mode', off: 'Off', unplugged: 'Not connected',
+  on: 'On', starting: 'Starting', off: 'Off', unplugged: 'Not connected',
 };
 
 function derive(d: InputDevice): InputInfo {
   const cec = d.subList?.find((s) => s.id === 'SIMPLINK');
-  const power = cec?.cecPower;
   let state: InputState;
-  if (!d.hdmiPlugIn && !d.connected) state = 'unplugged';
+  if (!d.hdmiPlugIn) state = 'unplugged';
   else if (d.hdmiSignalExist) state = 'on';
-  else if (power === 'On') state = 'starting';
-  else if (cec) state = 'rest';
-  else state = d.hdmiPlugIn ? 'off' : 'unplugged';
+  else if (cec?.cecPower === 'On') state = 'starting';
+  else state = 'off';
   return { appId: d.appId, label: d.label, state, device: cec?.osdName, cecId: cec?.uniqueId };
 }
 

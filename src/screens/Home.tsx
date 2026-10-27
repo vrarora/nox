@@ -54,7 +54,7 @@ export function Home({ apps, utils, focus, idle, onHover, onOpen }: Props) {
         <div class="preview__glare" aria-hidden="true" />
         <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} /></div>
         <div class="preview__text">
-          <div class="preview__kicker">{current?.kind === 'input' ? (current.state === 'on' ? 'Switch to' : current.state === 'rest' || current.state === 'off' ? 'Wake and switch to' : 'Input') : 'Open'}</div>
+          <div class="preview__kicker">{current?.kind === 'input' ? 'Switch to' : 'Open'}</div>
           <div class="preview__title">{current?.subtitle ? `${current.title} · ${current.subtitle}` : current?.title}</div>
         </div>
       </section>

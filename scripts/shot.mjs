@@ -31,7 +31,7 @@ sock.onmessage = ({ data }) => { const m = JSON.parse(data); const p = pending.g
 await new Promise((r) => { sock.onopen = r; });
 
 if (expr) {
-  const r = await call('Runtime.evaluate', { expression: expr, returnByValue: true });
+  const r = await call('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true });
   console.log(JSON.stringify(r.result.value, null, 1));
 }
 const shot = await call('Page.captureScreenshot', { format: 'png' });
