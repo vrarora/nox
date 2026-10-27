@@ -49,7 +49,6 @@ export function Preview({ current, nuvio }: { current: Entry | undefined; nuvio:
 
   return (
     <section class="preview" aria-live="polite" key="glyph">
-      <div class="preview__glare" aria-hidden="true" />
       <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} /></div>
       <div class="preview__text">
         <div class="preview__kicker">{current?.kind === 'input' ? 'Switch to' : 'Open'}</div>

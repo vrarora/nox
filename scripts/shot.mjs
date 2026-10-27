@@ -7,11 +7,12 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const info = JSON.parse(readFileSync(resolve(root, 'public/appinfo.json'), 'utf8'));
 const device = process.env.TV_DEVICE ?? 'lgtv';
+const appId = process.env.APP_ID ?? info.id;
 const out = resolve(process.argv[2] ?? 'build/shot.png');
 const expr = process.argv[3];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const proc = spawn('npx', ['ares-inspect', '-d', device, '-a', info.id], { cwd: root });
+const proc = spawn('npx', ['ares-inspect', '-d', device, '-a', appId], { cwd: root });
 let port = null;
 proc.stdout.on('data', (d) => { const m = String(d).match(/localhost:(\d+)/); if (m) port = m[1]; });
 for (let i = 0; i < 40 && !port; i++) await sleep(250);

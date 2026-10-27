@@ -45,13 +45,17 @@ export function App() {
     select();
     // An HDMI input with a sleeping CEC device: ask the TV to wake it as it switches.
     const info = e.kind === 'input' ? inputs[e.appId] : undefined;
+    // Nuvio with something to resume: open straight on that title's page.
+    const resume = e.key === 'nuvio' && nuvio.status === 'linked' ? nuvio.items[0] : undefined;
     const params = info?.cecId !== undefined && info.state !== 'on'
       ? { id: 'uniqueId', value: String(info.cecId) }
-      : e.params;
+      : resume
+        ? { itemId: resume.id, itemType: resume.type, fallbackTitle: resume.title, fallbackPoster: resume.poster ?? '', fallbackBackground: resume.background ?? '' }
+        : e.params;
     launch(e.appId, params).then((r) => {
       if (r.returnValue === false) toast(`Couldn't open ${e.title}`);
     });
-  }, [inputs]);
+  }, [inputs, nuvio.status, nuvio.items]);
 
   const activate = useCallback((f: Focus) => {
     const e = (f.zone === 'list' ? apps : utils)[f.index];
