@@ -49,11 +49,7 @@ export function Preview({ current, nuvio }: { current: Entry | undefined; nuvio:
 
   return (
     <section class="preview" aria-live="polite" key="glyph">
-      <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} /></div>
-      <div class="preview__text">
-        <div class="preview__kicker">{current?.kind === 'input' ? 'Switch to' : 'Open'}</div>
-        <div class="preview__title">{current?.subtitle ? `${current.title} · ${current.subtitle}` : current?.title}</div>
-      </div>
+      <div class="preview__glyph" key={current?.key}><Glyph name={current?.key ?? ''} lit /></div>
     </section>
   );
 }

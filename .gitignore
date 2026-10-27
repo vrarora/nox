@@ -3,3 +3,4 @@ dist/
 build/
 *.ipk
 .DS_Store
+.scratch/

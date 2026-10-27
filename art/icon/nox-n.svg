@@ -1,0 +1,30 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e0e0f"/><stop offset="1" stop-color="#060607"/></linearGradient>
+  <radialGradient id="tileLight" cx="0.5" cy="-0.1" r="0.9"><stop offset="0" stop-color="#ffffff" stop-opacity="0.045"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+  <linearGradient id="rib" x1="290" y1="307" x2="734" y2="717" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f7f7f8"/><stop offset="0.36" stop-color="#e4e4e7"/><stop offset="0.54" stop-color="#78787d"/><stop offset="0.72" stop-color="#8c8c91"/><stop offset="1" stop-color="#c4c4c8"/></linearGradient>
+  <linearGradient id="glassR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4e4e52"/><stop offset="0.5" stop-color="#2f2f33"/><stop offset="1" stop-color="#222226"/></linearGradient>
+  <linearGradient id="glassL" x1="0" y1="0" x2="0" y2="1"><stop offset="0.12" stop-color="#8c8c90"/><stop offset="0.32" stop-color="#4c4c50"/><stop offset="0.65" stop-color="#27272b"/><stop offset="1" stop-color="#121214"/></linearGradient>
+  <linearGradient id="spec" x1="290" y1="307" x2="734" y2="717" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.3" stop-color="#fff" stop-opacity="0.3"/><stop offset="0.45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="specBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="soft" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="1.7"/></filter>
+  <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0"/></filter>
+  <clipPath id="n"><path d="M343 307 H416 L556 436.3 V307 H704 A30 30 0 0 1 734 337 V664 A53 53 0 0 1 681 717 H608 L468 587.7 V717 H308 A18 18 0 0 1 290 699 V360 A53 53 0 0 1 343 307 Z"/></clipPath>
+  <clipPath id="rc"><path d="M290 307 H416 L734 717 H608 Z"/></clipPath>
+</defs>
+<rect width="1024" height="1024" rx="236" fill="url(#tile)"/>
+<rect width="1024" height="1024" rx="236" fill="url(#tileLight)"/>
+<rect x="1.5" y="1.5" width="1021" height="1021" rx="235" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="3"/>
+<g clip-path="url(#n)" filter="url(#soft)">
+  <rect x="290" y="307" width="178" height="410" fill="url(#glassL)"/>
+  <rect x="556" y="307" width="178" height="410" fill="url(#glassR)"/>
+  <rect x="558" y="309" width="174" height="410" rx="26" fill="none" stroke="#fff" stroke-opacity="0.07" stroke-width="2"/>
+  <path d="M290 307 H416 L734 717 H608 Z" transform="translate(6 18)" fill="#000" opacity="0.7" filter="url(#shadow)"/>
+  <path d="M290 307 H416 L734 717 H608 Z" fill="url(#rib)"/>
+  <g clip-path="url(#rc)">
+    <path d="M290 307 H416 L734 717 H684 L366 307 Z" fill="url(#spec)" filter="url(#specBlur)"/>
+  </g>
+</g>
+<rect width="1024" height="1024" rx="236" filter="url(#grain)" opacity="0.5"/>
+</svg>

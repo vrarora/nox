@@ -46,7 +46,7 @@ export function Home({ apps, utils, focus, idle, moving, nuvio, onHover, onOpen 
               onMouseEnter={() => onHover({ zone: 'list', index: i })}
               onClick={() => onOpen(e)}
             >
-              <span class="row__glyph" style={on ? { color: e.colour } : undefined}><Glyph name={e.key} /></span>
+              <span class="row__glyph" style={on ? { color: e.colour } : undefined}><Glyph name={e.key} lit={on} /></span>
               <span class="row__title">{e.title}</span>
               {e.state && <span class={`row__state row__state--${e.state}`} title={e.subtitle} />}
             </li>

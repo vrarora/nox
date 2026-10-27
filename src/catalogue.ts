@@ -14,11 +14,11 @@ export interface Entry {
 
 export const CATALOGUE: Entry[] = [
   { key: 'nuvio',   title: 'Nuvio',         appId: 'space.nuvio.webos',   colour: '#7b5cff', kind: 'app', subtitle: 'Films and series' },
-  { key: 'youtube', title: 'YouTube',       appId: 'youtube.leanback.v4', colour: '#ff2d2d', kind: 'app', subtitle: 'Ad-free' },
+  { key: 'youtube', title: 'YouTube',       appId: 'youtube.leanback.v4', colour: '#ff0000', kind: 'app', subtitle: 'Ad-free' },
   { key: 'netflix', title: 'Netflix',       appId: 'netflix',             colour: '#e50914', kind: 'app' },
-  { key: 'prime',   title: 'Prime Video',   appId: 'amazon',              colour: '#00a8e1', kind: 'app' },
+  { key: 'prime',   title: 'Prime Video',   appId: 'amazon',              colour: '#0779ff', kind: 'app' },
   { key: 'hotstar', title: 'JioHotstar',    appId: 'hotstar',             colour: '#1f80e0', kind: 'app' },
-  { key: 'spotify', title: 'Spotify',       appId: 'spotify-beehive',     colour: '#1db954', kind: 'app' },
+  { key: 'spotify', title: 'Spotify',       appId: 'spotify-beehive',     colour: '#2ebd59', kind: 'app' },
   { key: 'ps5',     title: 'PlayStation 5', appId: 'com.webos.app.hdmi2', colour: '#2f6cff', kind: 'input', subtitle: 'HDMI 2' },
   { key: 'sill',     title: 'Sill settings', appId: '',                           colour: '#ffffff', kind: 'utility' },
   { key: 'inputs',   title: 'Inputs',   appId: 'com.webos.app.quickinputpicker', colour: '#ffffff', kind: 'utility' },
