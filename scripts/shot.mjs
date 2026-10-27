@@ -1,4 +1,6 @@
 // Screenshot of the running app over DevTools, plus any expression you pass.
+// The inspector lists every resident web app; the page whose URL carries the
+// app id is the one we want.
 // Usage: node scripts/shot.mjs [out.png] [js-expression]
 import { spawn } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -19,7 +21,7 @@ for (let i = 0; i < 40 && !port; i++) await sleep(250);
 if (!port) { proc.kill(); throw new Error('ares-inspect gave no port'); }
 let ws = null;
 for (let i = 0; i < 20 && !ws; i++) {
-  try { const list = await fetch(`http://localhost:${port}/json`).then((r) => r.json()); ws = (list.find((p) => p.type === 'page') ?? list[0])?.webSocketDebuggerUrl; } catch { /* retry */ }
+  try { const list = await fetch(`http://localhost:${port}/json`).then((r) => r.json()); ws = (list.find((p) => p.type === 'page' && p.url.includes(appId)) ?? list.find((p) => p.type === 'page') ?? list[0])?.webSocketDebuggerUrl; } catch { /* retry */ }
   if (!ws) await sleep(250);
 }
 if (!ws) { proc.kill(); throw new Error('no DevTools page'); }

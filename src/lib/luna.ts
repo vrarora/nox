@@ -44,9 +44,12 @@ export function luna<T extends Json = Json>(uri: string, params: Json = {}, ms =
 export const launch = (id: string, params: Json = {}) =>
   luna('luna://com.webos.applicationManager/launch', { id, params });
 
+// Off the TV (vite dev in a browser) every app counts as installed.
 export const appExists = (appId: string) =>
-  luna<{ exist?: boolean }>('luna://com.webos.applicationManager/getAppLoadStatus', { appId }, 3000)
-    .then((r) => r.exist === true);
+  typeof PalmServiceBridge === 'undefined'
+    ? Promise.resolve(true)
+    : luna<{ exist?: boolean }>('luna://com.webos.applicationManager/getAppLoadStatus', { appId }, 3000)
+      .then((r) => r.exist === true);
 
 export interface InputDevice {
   id: string; label: string; port: number; appId: string;
